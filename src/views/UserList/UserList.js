@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchAllUsers} from 'actions/users';
 import { bindActionCreators } from 'redux';
+import Load from 'views/Load'
+import { isNil } from 'lodash'
 
 const styles = theme => ({
   root: {
@@ -18,21 +20,21 @@ const styles = theme => ({
 
 class UserList extends PureComponent {
 
-  
   componentWillMount() {
-    this.props.fetchAllUsers();
+    this.props.fetchAllUsers(this.props);
   }
 
   render() {
     const { users, classes, ...rest } = this.props;
-    return (
-    <div className={classes.root}>
-      
-      <div className={classes.content}>
-        <UsersTable {...rest} users={users.docs} />
-      </div>
-    </div>
-  );
+    if (!isNil(users)) {
+      return (
+        <div className={classes.root}>
+          <div className={classes.content}>
+            <UsersTable {...rest} users={users.docs} />
+          </div>
+        </div>
+      );
+    } return (<Load />)
   }
 }
 

@@ -7,8 +7,18 @@ import {
 } from './types';
 import request from '../../utils/request';
 
+/**
+ * Handle response errors.
+ */
 
-export const fetchAllUsers = () => {
+const handleResponseError = (error, ownProps) => {
+    if (ownProps.history) {
+        const path = `/error/${error.response.status}`;
+        ownProps.history.push(path)
+    }
+};
+
+export const fetchAllUsers = (ownProps) => {
   const action = {
     type: FETCH_ALL_USERS,
     payload: []
@@ -19,12 +29,12 @@ export const fetchAllUsers = () => {
       const response = await request({ method: 'GET', url: '/users' });
       dispatch({ ...action, payload: response });
     } catch (e) {
-      dispatch(action);
+      handleResponseError(e, ownProps)
     }
   };
 };
 
-export const fetchUserByUsername = (username) => {
+export const fetchUserByUsername = (username, ownProps) => {
   const action = {
     type: FETCH_USER_BY_USERNAME
   };
@@ -33,12 +43,12 @@ export const fetchUserByUsername = (username) => {
       const response = await request({ method: 'GET', url: `/users/${username}/details` });
       dispatch({ ...action, payload: response });
     } catch (e) {
-      dispatch(action);
+      handleResponseError(e, ownProps);
     }
   };
 };
 
-export const fetchAllUserRepos = (username) => {
+export const fetchAllUserRepos = (username, ownProps) => {
   const action = {
     type: FETCH_ALL_USER_REPOS
   };
@@ -48,7 +58,7 @@ export const fetchAllUserRepos = (username) => {
       const response = await request({ method: 'GET', url: `/users/${username}/repos?type=all`});
       dispatch({ ...action, payload: response });
     } catch (e) {
-      dispatch(action);
+      handleResponseError(e, ownProps);
     }
   };
 };

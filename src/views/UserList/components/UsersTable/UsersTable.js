@@ -41,7 +41,7 @@ const UsersTable = props => {
   
   const classes = useStyles();
 
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedUsers] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
 
@@ -58,8 +58,7 @@ const UsersTable = props => {
     props.history.push(path)
   }
 
-  if(users) {
-    return (
+  return (
       <Card
         {...rest}
         className={clsx(classes.root, className)}
@@ -109,8 +108,6 @@ const UsersTable = props => {
         </CardActions>
       </Card>
     );
-  }
-  return null
 };
 
 UsersTable.propTypes = {

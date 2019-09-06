@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-
+import Load from 'views/Load'
 
 const styles = theme => ({
     root: {
@@ -40,7 +40,7 @@ class UserDetails extends PureComponent {
                     xl={12}
                     xs={12}
                     >
-                    <UserInfo user={fetchedUser}/>
+                    {fetchedUser ? <UserInfo user={fetchedUser}/> : <Load />}
                     </Grid>
                     <Grid
                     item
@@ -49,7 +49,7 @@ class UserDetails extends PureComponent {
                     xl={12}
                     xs={12}
                     >
-                    <UserRepos repos={fetchedUserRepos}/>
+                    {fetchedUserRepos ? <UserRepos repos={fetchedUserRepos}/> : <Load />}
                     </Grid>
                 </Grid>
             </div>

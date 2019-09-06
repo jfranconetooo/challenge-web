@@ -6,7 +6,9 @@ import { Minimal as MinimalLayout } from './layouts';
 
 import {
   UserList as UserListView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Error403 as Error403View,
+  Error500 as Error500View
 } from './views';
 
 import {
@@ -38,6 +40,18 @@ const Routes = () => {
         exact
         layout={MinimalLayout}
         path="/not-found"
+      />
+      <RouteWithLayout
+        component={Error403View}
+        exact
+        layout={MinimalLayout}
+        path="/error/403"
+      />
+      <RouteWithLayout
+        component={Error500View}
+        exact
+        layout={MinimalLayout}
+        path="/error/500"
       />
       <Redirect to="/not-found" />
     </Switch>

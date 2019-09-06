@@ -6,6 +6,6 @@ export default async (params) => {
         const response = await axios(params)
         return response.data
     } catch (error) {
-        throw new Error(error.message)
+        throw error
     }
 }

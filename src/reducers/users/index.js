@@ -13,7 +13,7 @@ import {
 } from 'actions/users/types';
 
 const initialState = {
-  list: [],
+  list: null,
   search: ''
 };
 

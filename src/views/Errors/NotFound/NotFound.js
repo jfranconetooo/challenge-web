@@ -9,12 +9,6 @@ const useStyles = makeStyles(theme => ({
   content: {
     paddingTop: 150,
     textAlign: 'center'
-  },
-  image: {
-    marginTop: 50,
-    display: 'inline-block',
-    maxWidth: '100%',
-    width: 560
   }
 }));
 
@@ -41,11 +35,6 @@ const NotFound = () => {
               You either tried some shady route or you came here by mistake.
               Whichever it is, try using the navigation
             </Typography>
-            <img
-              alt="Under development"
-              className={classes.image}
-              src="/images/undraw_page_not_found_su7k.svg"
-            />
           </div>
         </Grid>
       </Grid>
