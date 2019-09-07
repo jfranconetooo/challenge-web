@@ -24,13 +24,17 @@ class UserList extends PureComponent {
     this.props.fetchAllUsers(this.props);
   }
 
+  fetUsers = since => {
+    this.props.fetchAllUsers(since, this.props);
+  }
+
   render() {
     const { users, classes, ...rest } = this.props;
     if (!isNil(users)) {
       return (
         <div className={classes.root}>
           <div className={classes.content}>
-            <UsersTable {...rest} users={users.docs} />
+            <UsersTable {...rest} users={users} fetUsers={this.fetUsers}/>
           </div>
         </div>
       );

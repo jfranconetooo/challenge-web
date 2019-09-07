@@ -18,7 +18,7 @@ const handleResponseError = (error, ownProps) => {
     }
 };
 
-export const fetchAllUsers = (ownProps) => {
+export const fetchAllUsers = (since, ownProps) => {
   const action = {
     type: FETCH_ALL_USERS,
     payload: []
@@ -26,7 +26,7 @@ export const fetchAllUsers = (ownProps) => {
 
   return async (dispatch) => {
     try {
-      const response = await request({ method: 'GET', url: '/users' });
+      const response = await request({ method: 'GET', url: `/users?since=${since}` });
       dispatch({ ...action, payload: response });
     } catch (e) {
       handleResponseError(e, ownProps)

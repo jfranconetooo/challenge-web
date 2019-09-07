@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -13,8 +13,9 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TablePagination
+  Button
 } from '@material-ui/core';
+import {ArrowRight as ArrowRightIcon, ArrowLeft as ArrowLeftIcon} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -28,29 +29,18 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center'
   },
-  avatar: {
-    marginRight: theme.spacing(2)
-  },
   actions: {
     justifyContent: 'flex-end'
   }
 }));
 
 const UsersTable = props => {
-  const { className, users, ...rest } = props;
+  const { className, users, fetUsers, ...rest } = props;
   
   const classes = useStyles();
 
-  const [selectedUsers] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [page, setPage] = useState(0);
-
-  const handlePageChange = (event, page) => {
-    setPage(page);
-  };
-
-  const handleRowsPerPageChange = event => {
-    setRowsPerPage(event.target.value);
+  const handleNextButton = (since) => {
+    fetUsers(since)
   };
 
   const redirect = user => {
@@ -74,12 +64,11 @@ const UsersTable = props => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {users.map(user => (
+                  {users.docs.map(user => (
                     <TableRow
                       className={classes.tableRow}
                       hover
                       key={user.id}
-                      selected={selectedUsers.indexOf(user.id) !== -1}
                       onClick={() => redirect(user)}
                     >
                       <TableCell >
@@ -96,15 +85,23 @@ const UsersTable = props => {
           </PerfectScrollbar>
         </CardContent>
         <CardActions className={classes.actions}>
-          <TablePagination
-            component="div"
-            count={users.length}
-            onChangePage={handlePageChange}
-            onChangeRowsPerPage={handleRowsPerPageChange}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOptions={[10, 25]}
-          />
+          <Button
+            color="primary"
+            size="small"
+            variant="text"
+            disabled={users.prev === undefined}
+          >
+            <ArrowLeftIcon /> Prev
+          </Button>
+          <Button
+            color="primary"
+            size="small"
+            variant="text"
+            disabled={users.next === undefined}
+            onClick={() => handleNextButton(users.next.since)}
+          >
+            Next <ArrowRightIcon />
+          </Button>
         </CardActions>
       </Card>
     );

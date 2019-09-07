@@ -19,8 +19,8 @@ class UserDetails extends PureComponent {
 
     componentWillMount() {
         const { username } = this.props.match.params
-        this.props.fetchAllUserRepos(username);
-        this.props.fetchUserByUsername(username)
+        this.props.fetchAllUserRepos(username, this.props);
+        this.props.fetchUserByUsername(username, this.props)
     }
 
     render() {
