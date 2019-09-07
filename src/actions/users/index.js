@@ -6,14 +6,16 @@ import {
     CLEAR_FETCHED_USER_REPOS
 } from './types';
 import request from '../../utils/request';
-
+import { get } from 'lodash';
 /**
  * Handle response errors.
  */
 
 const handleResponseError = (error, ownProps) => {
     if (ownProps.history) {
-        const path = `/error/${error.response.status}`;
+        let path
+        if (get(error, 'response.status', false)) path = `/error/${error.response.status}`;
+        else path = '/error/500';
         ownProps.history.push(path)
     }
 };

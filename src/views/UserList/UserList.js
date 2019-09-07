@@ -21,7 +21,7 @@ const styles = theme => ({
 class UserList extends PureComponent {
 
   componentWillMount() {
-    this.props.fetchAllUsers(this.props);
+    this.props.fetchAllUsers(0,this.props);
   }
 
   fetUsers = since => {
