@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = process.env.API_URL  || 'http://localhost:4000/api';
+axios.defaults.baseURL = process.env.API_URL || 'https://github-challenge.herokuapp.com/api';
 
 export default async (params) => {
     try {
