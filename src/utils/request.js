@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = process.env.API_URL || 'http://localhost:4000';
+axios.defaults.baseURL = process.env.API_URL || 'http://localhost:4000/api';
 
 export default async (params) => {
     try {

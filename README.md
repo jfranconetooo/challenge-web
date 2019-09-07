@@ -1,6 +1,6 @@
 # Github App Web #
 
-The Github App Web.
+The Github App Web in Reactjs. 
 
 ## Install and Run 
 
